@@ -1,8 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component} from '@angular/core';
 import { NavController, AlertController, reorderArray, ToastController } from 'ionic-angular';
 import { TodoProvider } from '../../providers/todo/todo';
 import { ArchivedTodosPage } from '../archived-todos/archived-todos';
-import { text } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'page-home',
