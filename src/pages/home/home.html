@@ -1,14 +1,46 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Todo
     </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="toggleReordering()" *ngIf="!reorderIsEnabled">
+        Edit
+      </button>
+      <button ion-button (click)="toggleReordering()" *ngIf="reorderIsEnabled">
+        Done
+      </button>
+
+      <button ion-button (click)="openTodoAlert()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-list [reorder]="reorderIsEnabled" (ionItemReorder)="itemReordered($event)" >
+    <ion-item-sliding *ngFor="let todo of todos; let todoIndex = index" >
+      <ion-item>{{todo}}</ion-item>
+
+      <ion-item-options side="right">
+        <button color="danger" ion-button (click)="archiveTodo(todoIndex)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+
+      <ion-item-options side="left">
+        <button color="info" ion-button (click)="openUpdateTodoAlert(todoIndex)">
+          <ion-icon name="create"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab rigth bottom>
+    <button ion-fab (click)="goToArchivedTodosPage()">
+      <ion-icon name="archive"></ion-icon>
+    </button>
+  </ion-fab>
+
 </ion-content>
